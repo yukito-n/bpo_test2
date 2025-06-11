@@ -1,16 +1,19 @@
-import functions_framework
-from flask import jsonify, Request
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 from google.cloud import firestore, storage
 import uuid
 import os
 from datetime import datetime
 
+app = Flask(__name__)
+CORS(app)
+
 firestore_client = firestore.Client()
 storage_client = storage.Client()
 BUCKET_NAME = os.environ.get('BUCKET_NAME', 'receipt-images')
 
-@functions_framework.http
-def create_receipt(request: Request):
+@app.route('/receipts', methods=['POST'])
+def create_receipt():
     try:
         request_json = request.form if request.form else request.get_json(silent=True)
         if request_json is None:
@@ -45,8 +48,8 @@ def create_receipt(request: Request):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@functions_framework.http
-def list_receipts(request: Request):
+@app.route('/receipts', methods=['GET'])
+def list_receipts():
     try:
         case_id = request.args.get('caseId') if request.args else None
         receipts_ref = firestore_client.collection('receipts')
@@ -60,9 +63,8 @@ def list_receipts(request: Request):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@functions_framework.http
-def get_receipt(request: Request):
-    receipt_id = request.view_args.get('receiptId') if request.view_args else None
+@app.route('/receipts/<receipt_id>', methods=['GET'])
+def get_receipt(receipt_id):
     if not receipt_id:
         return jsonify({'error': 'Missing receiptId'}), 400
     try:
@@ -74,9 +76,8 @@ def get_receipt(request: Request):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@functions_framework.http
-def update_receipt(request: Request):
-    receipt_id = request.view_args.get('receiptId') if request.view_args else None
+@app.route('/receipts/<receipt_id>', methods=['PUT'])
+def update_receipt(receipt_id):
     if not receipt_id:
         return jsonify({'error': 'Missing receiptId'}), 400
     try:
@@ -89,8 +90,8 @@ def update_receipt(request: Request):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@functions_framework.http
-def get_summary_report(request: Request):
+@app.route('/reports/summary', methods=['GET'])
+def get_summary_report():
     try:
         receipts_ref = firestore_client.collection('receipts')
         docs = receipts_ref.stream()
@@ -107,3 +108,6 @@ def get_summary_report(request: Request):
         return jsonify({'totalReceipts': total, 'statusCounts': status_count, 'processedPerAssignee': assignee_count}), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=8080)

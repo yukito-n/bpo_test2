@@ -51,22 +51,21 @@ This project demonstrates a minimal local-first setup for managing data entry an
     pip install -r requirements.txt
     export GOOGLE_CLOUD_PROJECT=local-project
     export BUCKET_NAME=receipt-images
-    functions-framework --target=create_receipt
+    functions-framework --target=app
     ```
 
 On Windows `cmd.exe`, use `set` to define environment variables:
 ```cmd
 set GOOGLE_CLOUD_PROJECT=local-project
 set BUCKET_NAME=receipt-images
-functions-framework --target=create_receipt
+functions-framework --target=app
 ```
 For PowerShell:
 ```powershell
 $env:GOOGLE_CLOUD_PROJECT="local-project"
 $env:BUCKET_NAME="receipt-images"
-functions-framework --target=create_receipt
+functions-framework --target=app
 ```
-    Other function targets can be launched in separate terminals using the same command with a different `--target` value.
 
 3. **Install frontend dependencies and start the React app:**
     ```bash
