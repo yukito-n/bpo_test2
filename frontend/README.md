@@ -1,10 +1,17 @@
 # Frontend for Paper Operations Tool
 
-Run the app locally:
+This directory contains the React Single Page Application used to interact with the backend.
 
-```bash
-npm install
-npm start
-```
+## Running Locally
 
-Set `REACT_APP_API_BASE` environment variable to configure backend API base URL.
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server (defaults to `http://localhost:3000`):
+   ```bash
+   REACT_APP_API_BASE=http://localhost:8080 npm start
+   ```
+
+The `REACT_APP_API_BASE` variable defines where API requests are sent. When running the backend with the Functions Framework the base URL should be `http://localhost:8080`.
