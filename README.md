@@ -53,6 +53,19 @@ This project demonstrates a minimal local-first setup for managing data entry an
     export BUCKET_NAME=receipt-images
     functions-framework --target=create_receipt
     ```
+
+On Windows `cmd.exe`, use `set` to define environment variables:
+```cmd
+set GOOGLE_CLOUD_PROJECT=local-project
+set BUCKET_NAME=receipt-images
+functions-framework --target=create_receipt
+```
+For PowerShell:
+```powershell
+$env:GOOGLE_CLOUD_PROJECT="local-project"
+$env:BUCKET_NAME="receipt-images"
+functions-framework --target=create_receipt
+```
     Other function targets can be launched in separate terminals using the same command with a different `--target` value.
 
 3. **Install frontend dependencies and start the React app:**
@@ -61,6 +74,17 @@ This project demonstrates a minimal local-first setup for managing data entry an
     npm install
     REACT_APP_API_BASE=http://localhost:8080 npm start
     ```
+
+On Windows `cmd.exe` run:
+```cmd
+set REACT_APP_API_BASE=http://localhost:8080
+npm start
+```
+For PowerShell:
+```powershell
+$env:REACT_APP_API_BASE='http://localhost:8080'
+npm start
+```
     The development server runs at <http://localhost:3000>.
 
 4. **Verify the API** (optional example using `curl`):
