@@ -16,20 +16,34 @@ This project demonstrates a minimal local-first setup for managing data entry an
    docker pull google/cloud-sdk:emulators
    ```
 3. Start the Firestore emulator container (leave this terminal running):
-   ```bash
-   docker run --rm -it -p 8081:8080 google/cloud-sdk:emulators \
-     gcloud beta emulators firestore start --host-port=0.0.0.0:8080
-   ```
+   - **Linux/macOS**
+     ```bash
+     docker run --rm -it -p 8081:8080 google/cloud-sdk:emulators \
+       gcloud beta emulators firestore start --host-port=0.0.0.0:8080
+     ```
+   - **Windows (cmd.exe)**
+     ```cmd
+     docker run --rm -it -p 8081:8080 google/cloud-sdk:emulators ^
+       gcloud beta emulators firestore start --host-port=0.0.0.0:8080
+     ```
+     Make sure there is **no trailing space** after the caret (`^`).
    The `--rm` flag cleans up the container when you stop it with `Ctrl+C`.
    You can confirm it is running using `docker ps`.
 
 ## Local Setup
 
 1. **Start the Firestore emulator** (leave this terminal running):
-    ```bash
-    docker run --rm -it -p 8081:8080 google/cloud-sdk:emulators \
-      gcloud beta emulators firestore start --host-port=0.0.0.0:8080
-    ```
+    - **Linux/macOS**
+      ```bash
+      docker run --rm -it -p 8081:8080 google/cloud-sdk:emulators \
+        gcloud beta emulators firestore start --host-port=0.0.0.0:8080
+      ```
+    - **Windows (cmd.exe)**
+      ```cmd
+      docker run --rm -it -p 8081:8080 google/cloud-sdk:emulators ^
+        gcloud beta emulators firestore start --host-port=0.0.0.0:8080
+      ```
+      Again ensure no spaces follow the caret.
 
 2. **Install backend dependencies and run the Functions Framework:**
     ```bash
