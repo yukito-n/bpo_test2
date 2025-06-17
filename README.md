@@ -120,3 +120,7 @@ docker-compose up
 ```
 
 The backend will be available on `http://localhost:8080` and the emulator on port `8081`. Environment variables like `FIRESTORE_EMULATOR_HOST` are set automatically. Use `docker-compose down` to stop all containers.
+
+Note: Docker Compose v2 ignores the `version` field, so it has been removed from `docker-compose.yml`.
+
+If you see an error such as `Bind for 0.0.0.0:8081 failed: port is already allocated`, another process is already using that port. Stop the other process or change the port mapping in `docker-compose.yml` before running `docker-compose up` again.
