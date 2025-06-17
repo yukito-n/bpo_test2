@@ -11,6 +11,9 @@ This project demonstrates a minimal local-first setup for managing data entry an
 
 1. Install Docker Desktop or the Docker Engine for your OS.
    Verify installation with `docker --version`.
+   Ensure the Docker daemon is running (start Docker Desktop or your Docker service) before continuing.
+   You can confirm with `docker info`. If the daemon isn't running you may see errors such as:
+   `open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified`.
 2. Pull the emulator image (optional, as `docker run` will pull automatically):
    ```bash
    docker pull google/cloud-sdk:emulators
@@ -108,6 +111,10 @@ running and that the environment variable `FIRESTORE_EMULATOR_HOST` is set in th
 terminal where you launched the functions framework. Without this variable the
 backend will exit with a `DefaultCredentialsError` and the API will be
 unreachable.
+
+If Docker commands fail with `open //./pipe/dockerDesktopLinuxEngine: The system
+cannot find the file specified`, start Docker Desktop (or your Docker daemon)
+before running `docker` or `docker-compose`.
 
 Receipts created in the UI are stored in the Firestore emulator. Cloud Storage can be emulated locally in a similar manner if needed.
 
