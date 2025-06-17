@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from google.cloud import firestore, storage
+from google.auth.exceptions import DefaultCredentialsError
 import uuid
 import os
 from datetime import datetime
@@ -8,7 +9,18 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
-firestore_client = firestore.Client()
+def init_firestore_client():
+    if os.environ.get('FIRESTORE_EMULATOR_HOST'):
+        project = os.environ.get('GOOGLE_CLOUD_PROJECT', 'local-project')
+        return firestore.Client(project=project)
+    try:
+        return firestore.Client()
+    except DefaultCredentialsError as e:
+        raise RuntimeError(
+            "Firestore credentials not found. Set FIRESTORE_EMULATOR_HOST or configure credentials."
+        ) from e
+
+firestore_client = init_firestore_client()
 storage_client = storage.Client()
 BUCKET_NAME = os.environ.get('BUCKET_NAME', 'receipt-images')
 

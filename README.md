@@ -98,8 +98,16 @@ npm start
 
 4. **Verify the API** (optional example using `curl`):
     ```bash
-    curl http://localhost:8080/receipts
+   curl http://localhost:8080/receipts
     ```
+
+### Troubleshooting
+
+If the React app shows `AxiosError: Network Error`, make sure the backend is
+running and that the environment variable `FIRESTORE_EMULATOR_HOST` is set in the
+terminal where you launched the functions framework. Without this variable the
+backend will exit with a `DefaultCredentialsError` and the API will be
+unreachable.
 
 Receipts created in the UI are stored in the Firestore emulator. Cloud Storage can be emulated locally in a similar manner if needed.
 
