@@ -46,26 +46,32 @@ This project demonstrates a minimal local-first setup for managing data entry an
       Again ensure no spaces follow the caret.
 
 2. **Install backend dependencies and run the Functions Framework:**
-    ```bash
-    cd backend
-    pip install -r requirements.txt
-    export GOOGLE_CLOUD_PROJECT=local-project
-    export BUCKET_NAME=receipt-images
-    functions-framework --target=app
-    ```
+    - **Linux/macOS**
+      ```bash
+      cd backend
+      pip install -r requirements.txt
+      export GOOGLE_CLOUD_PROJECT=local-project
+      export BUCKET_NAME=receipt-images
+      functions-framework --target=app
+      ```
 
-On Windows `cmd.exe`, use `set` to define environment variables:
-```cmd
-set GOOGLE_CLOUD_PROJECT=local-project
-set BUCKET_NAME=receipt-images
-functions-framework --target=app
-```
-For PowerShell:
-```powershell
-$env:GOOGLE_CLOUD_PROJECT="local-project"
-$env:BUCKET_NAME="receipt-images"
-functions-framework --target=app
-```
+    - **Windows (cmd.exe)**
+      ```cmd
+      cd backend
+      pip install -r requirements.txt
+      set GOOGLE_CLOUD_PROJECT=local-project
+      set BUCKET_NAME=receipt-images
+      functions-framework --target=app
+      ```
+
+    - **Windows PowerShell**
+      ```powershell
+      cd backend
+      pip install -r requirements.txt
+      $env:GOOGLE_CLOUD_PROJECT="local-project"
+      $env:BUCKET_NAME="receipt-images"
+      functions-framework --target=app
+      ```
 
 3. **Install frontend dependencies and start the React app:**
     ```bash
