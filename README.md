@@ -44,6 +44,7 @@ This project demonstrates a minimal local-first setup for managing data entry an
         gcloud beta emulators firestore start --host-port=0.0.0.0:8080
       ```
       Again ensure no spaces follow the caret.
+    Set `FIRESTORE_EMULATOR_HOST=localhost:8081` in any terminal that will run the backend.
 
 2. **Install backend dependencies and run the Functions Framework:**
     - **Linux/macOS**
@@ -52,6 +53,7 @@ This project demonstrates a minimal local-first setup for managing data entry an
       pip install -r requirements.txt
       export GOOGLE_CLOUD_PROJECT=local-project
       export BUCKET_NAME=receipt-images
+      export FIRESTORE_EMULATOR_HOST=localhost:8081
       functions-framework --target=app
       ```
 
@@ -61,6 +63,7 @@ This project demonstrates a minimal local-first setup for managing data entry an
       pip install -r requirements.txt
       set GOOGLE_CLOUD_PROJECT=local-project
       set BUCKET_NAME=receipt-images
+      set FIRESTORE_EMULATOR_HOST=localhost:8081
       functions-framework --target=app
       ```
 
@@ -70,6 +73,7 @@ This project demonstrates a minimal local-first setup for managing data entry an
       pip install -r requirements.txt
       $env:GOOGLE_CLOUD_PROJECT="local-project"
       $env:BUCKET_NAME="receipt-images"
+      $env:FIRESTORE_EMULATOR_HOST="localhost:8081"
       functions-framework --target=app
       ```
 
@@ -107,4 +111,4 @@ As an alternative to running services manually, you can launch the backend and F
 docker-compose up
 ```
 
-The backend will be available on `http://localhost:8080` and the emulator on port `8081`. Use `docker-compose down` to stop all containers.
+The backend will be available on `http://localhost:8080` and the emulator on port `8081`. Environment variables like `FIRESTORE_EMULATOR_HOST` are set automatically. Use `docker-compose down` to stop all containers.

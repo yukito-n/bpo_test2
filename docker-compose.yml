@@ -10,6 +10,7 @@ services:
     environment:
       GOOGLE_CLOUD_PROJECT: local-project
       BUCKET_NAME: receipt-images
+      FIRESTORE_EMULATOR_HOST: firestore:8080
     ports:
       - "8080:8080"
     depends_on:
