@@ -21,7 +21,19 @@ def init_firestore_client():
         ) from e
 
 firestore_client = init_firestore_client()
-storage_client = storage.Client()
+
+def init_storage_client():
+    if os.environ.get('STORAGE_EMULATOR_HOST'):
+        project = os.environ.get('GOOGLE_CLOUD_PROJECT', 'local-project')
+        return storage.Client(project=project)
+    try:
+        return storage.Client()
+    except DefaultCredentialsError as e:
+        raise RuntimeError(
+            "Storage credentials not found. Set STORAGE_EMULATOR_HOST or configure credentials."
+        ) from e
+
+storage_client = init_storage_client()
 BUCKET_NAME = os.environ.get('BUCKET_NAME', 'receipt-images')
 
 @app.route('/receipts', methods=['POST'])
